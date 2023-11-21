@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import numpy as np
 from PIL import Image
+import json
 
 # API URL and headers
 url = "https://infcloud.navan.ai/inference?model_name=1637745904_3441ccc1"
@@ -46,11 +47,19 @@ def classify_image(image_file):
     # Send the image data to the API
     files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
-    final=eval(response.text)
-    st.write(final)
-    st.write(type(final))
-    class_id=final[0][2]
-    st.write(class_id)
+    import json
+
+    # Convert the response data to a JSON object
+    response_data = json.loads(response.text)
+    
+    # Inspect the JSON object to identify the classification result
+    print(response_data)
+
+    # Modify the code to extract the classification result from the response data
+    classification = response_data["output"][0]["data"][0]
+    class_id = np.argmax(classification)
+
+
     # Interpret the class ID and classify the image
     if class_id == "0":
         classification = "Segmentation Paper"
