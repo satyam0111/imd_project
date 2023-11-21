@@ -46,11 +46,8 @@ def classify_image(image_file):
     # Send the image data to the API
     files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
-    response_data = response.json()
-
-    # Extract the classification results from the API response
-    predictions = response_data["output"][0]["data"][0]
-    class_id = np.argmax(predictions)
+    final=eval(response.text)
+    class_id=int((final[0][2]))
 
     # Interpret the class ID and classify the image
     if class_id == 0:
