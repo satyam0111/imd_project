@@ -11,11 +11,7 @@ url = "https://infcloud.navan.ai/inference?model_name=1637745904_3441ccc1"
 def classify_image(image_file):
     # Read the image file
     image = Image.open(image_file)
-
-    # Convert the image to a format compatible with the API
-    image_data = np.asarray(image).astype('uint8')
-    image_data = image_data.reshape((1, image_data.shape[0], image_data.shape[1], image_data.shape[2]))
-
+    
     # Prepare the payload for the API request
     payload = {'data': '''{
       "input":
