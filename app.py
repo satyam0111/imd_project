@@ -47,17 +47,13 @@ def classify_image(image_file):
     # Send the image data to the API
     files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
-    import json
-
+    
     # Convert the response data to a JSON object
     response_data = json.loads(response.text)
-    
-    # Inspect the JSON object to identify the classification result
-    st.write(response_data)
 
     # Modify the code to extract the classification result from the response data
-    classification = response_data["output"][0]["data"][0]
-    class_id = np.argmax(classification)
+    classification = response_data[0][0]
+    class_id = classification
 
 
     # Interpret the class ID and classify the image
