@@ -53,7 +53,7 @@ def classify_image(image_file):
     response_data = json.loads(response.text)
     
     # Inspect the JSON object to identify the classification result
-    print(response_data)
+    st.write(response_data)
 
     # Modify the code to extract the classification result from the response data
     classification = response_data["output"][0]["data"][0]
