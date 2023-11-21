@@ -48,7 +48,7 @@ def classify_image(image_file):
     files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
-    classification = respose.text
+    classification = response.text
     return classification
     # # Convert the response data to a JSON object
     # response_data = json.loads(response.text)
