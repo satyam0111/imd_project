@@ -52,11 +52,8 @@ def classify_image(image_file):
     response_data = json.loads(response.text)
 
     # Modify the code to extract the classification result from the response data
-    classification = response_data[0][0]
-    class_id = classification
-
-
-    # Interpret the class ID and classify the image
+    class_id= response_data[0][0]
+    
     if class_id == "0":
         classification = "Segmentation Paper"
     elif class_id == "1":
