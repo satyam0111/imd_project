@@ -47,23 +47,25 @@ def classify_image(image_file):
     # Send the image data to the API
     files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
-    
-    # Convert the response data to a JSON object
-    response_data = json.loads(response.text)
 
-    # Modify the code to extract the classification result from the response data
-    class_id= response_data[0][0]
-    
-    if class_id == "0":
-        classification = "Segmentation Paper"
-    elif class_id == "1":
-        classification = "Grade 1"
-    elif class_id == "2":
-        classification = "Grade 2"
-    else:
-        classification = "Grade 3"
-
+    classification = respose.text
     return classification
+    # # Convert the response data to a JSON object
+    # response_data = json.loads(response.text)
+
+    # # Modify the code to extract the classification result from the response data
+    # class_id= response_data[0][0]
+    
+    # if class_id == "0":
+    #     classification = "Segmentation Paper"
+    # elif class_id == "1":
+    #     classification = "Grade 1"
+    # elif class_id == "2":
+    #     classification = "Grade 2"
+    # else:
+    #     classification = "Grade 3"
+
+    # return classification
 
 # Initialize the Streamlit app
 st.title("Segmentation Paper or Grade Classification")
