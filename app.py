@@ -6,7 +6,7 @@ import json
 
 # API URL and headers
 url = "https://infcloud.navan.ai/inference?model_name=1637745904_3441ccc1"
-headers = {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoiMTYzNzc0NTkwNCIsIm1vZGVsX2lkIjoiMzQ0MWNjYzEifQ.AU0Qu5jjlJc7T1QO6FpQAp-9FWKz4EqiRsesEsmFKnE'}
+
 
 def classify_image(image_file):
     # Read the image file
@@ -17,35 +17,33 @@ def classify_image(image_file):
     image_data = image_data.reshape((1, image_data.shape[0], image_data.shape[1], image_data.shape[2]))
 
     # Prepare the payload for the API request
-    payload = {
-        'data': '''{
-            "input":
-            [
-              {
-                "name": "input_1",
-                "data_type": "TYPE_FP32",
-                "size": [
-                  240,
-                  240,
-                  3
-                ]
-              }
-            ],
-            "output":
-            [
-              {
-                "name": "dense_3",
-                "data_type": "TYPE_FP32",
-                "size": [
-                  4
-                ]
-              }
-            ]
-          }'''
-    }
-
+    payload = {'data': '''{
+      "input":
+      [
+      {
+        "name": "input_1",
+        "data_type": "TYPE_FP32",
+        "size": [
+          240,
+          240,
+          3
+        ]
+      }
+    ],
+      "output":
+      [
+      {
+        "name": "dense_3",
+        "data_type": "TYPE_FP32",
+        "size": [
+          4
+        ]
+      }
+    ]
+      }'''}
     # Send the image data to the API
-    files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
+    files = [('file', ('<file>', image_file.read(), 'image/jpg'))]
+    headers = {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoiMTYzNzc0NTkwNCIsIm1vZGVsX2lkIjoiMzQ0MWNjYzEifQ.AU0Qu5jjlJc7T1QO6FpQAp-9FWKz4EqiRsesEsmFKnE'}
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
     classification = response.text
