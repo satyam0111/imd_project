@@ -47,15 +47,16 @@ def classify_image(image_file):
     files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
     final=eval(response.text)
-    st.write("final")
-    class_id=int(final[0][2])
-    st.write("class_id")
+    st.write(final)
+    st.write(type(final))
+    class_id=final[0][2]
+    st.write(class_id)
     # Interpret the class ID and classify the image
-    if class_id == 0:
+    if class_id == "0":
         classification = "Segmentation Paper"
-    elif class_id == 1:
+    elif class_id == "1":
         classification = "Grade 1"
-    elif class_id == 2:
+    elif class_id == "2":
         classification = "Grade 2"
     else:
         classification = "Grade 3"
