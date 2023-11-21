@@ -38,7 +38,7 @@ def classify_image(image_file):
     ]
       }'''}
     # Send the image data to the API
-    files = [('file', ('<file>', image_file.read(), 'image/jpeg'))]
+    files = [('file', ('<file>', image_file.read(), 'image/png'))]
     headers = {'token': 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhY2NvdW50X2lkIjoiMTYzNzc0NTkwNCIsIm1vZGVsX2lkIjoiMzQ0MWNjYzEifQ.AU0Qu5jjlJc7T1QO6FpQAp-9FWKz4EqiRsesEsmFKnE'}
     response = requests.request("POST", url, headers=headers, data=payload, files=files)
 
@@ -65,7 +65,7 @@ def classify_image(image_file):
 st.title("Segmentation Paper or Grade Classification")
 
 # Upload the image file
-uploaded_file = st.file_uploader("Upload an image", type=["jpeg", "png"])
+uploaded_file = st.file_uploader("Upload an image", type=["jpg", "png"])
 
 if uploaded_file is None:
     st.info("Please upload an image file")
